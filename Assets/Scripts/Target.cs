@@ -1,17 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    [SerializeField] private int _hp = 50;
+    [SerializeField] public int MaxHp = 50;
+    private int _currentHp;
+
+    public event Action<float> HealthPoint;
+
+    private void Awake()
+    {
+        _currentHp = MaxHp;
+    }
+
+    private void Update()
+    {
+
+    }
 
     public void TakeDamage(int damage)
     {
-        _hp -= damage;
-        if(_hp <= 0)
+        _currentHp -= damage;
+        if(_currentHp <= 0)
         {
             Die();
+        }
+        else
+        {
+            float HealthInPercent = (float)_currentHp / MaxHp;
+            HealthPoint?.Invoke(HealthInPercent);
         }
     }
 

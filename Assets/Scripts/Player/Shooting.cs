@@ -10,7 +10,7 @@ public class Shooting : MonoBehaviour
 
     [SerializeField] private GameObject _prefabHit;
 
-    private float _fireRate = 15f;
+    private float _fireRate = 10f;
     private float _nextTimeToFire = 0f;
     
 
